@@ -3,6 +3,7 @@
         "mineiros.terramate",
         "opentofu.vscode-opentofu",
         "infracost.infracost",
+        "tamasfe.even-better-toml",
     ],
     "unwantedRecommendations": [
         "gamunu.opentofu",
