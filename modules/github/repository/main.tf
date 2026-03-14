@@ -6,17 +6,16 @@ resource "github_repository" "this" {
   has_wiki        = false
   has_discussions = true
   is_template     = var.is_template
-  topics          = concat(["managed-by-opentofu"], var.topics)
+  topics          = var.topics
 
   # Init config
   auto_init          = true
   gitignore_template = var.gitignore_template != "" ? var.gitignore_template : null
-  license_template   = var.license_template != "" ? var.license_template : null
-  # For PRs
-  allow_update_branch    = true
-  delete_branch_on_merge = true
+  license_template   = var.license_template
 
   # Merging
+  allow_update_branch         = true
+  delete_branch_on_merge      = true
   allow_auto_merge            = true
   allow_rebase_merge          = true
   allow_merge_commit          = var.allow_merge_commit
@@ -38,8 +37,9 @@ resource "github_repository" "this" {
     }
   }
 
+  # Security
   vulnerability_alerts = true
-  # Advanced Security only for public repos
+  ## Advanced Security only for public repos
   security_and_analysis {
     advanced_security {
       status = var.visibility == "public" ? "enabled" : "disabled"
