@@ -1,0 +1,18 @@
+[tools]
+infracost = "0.10.43"
+opentofu = "1.11.5"
+terramate = "0.16.0"
+
+# Tofu tasks
+[tasks."tofu:plan"]
+run = "tofu plan -lock=true"
+alias = "tfp"
+
+[tasks."tofu:apply"]
+run = "tofu apply -lock=true -concise -auto-approve"
+alias = "tfa"
+
+# Terramate tasks
+[tasks."terramate:generate"]
+run = "terramate generate"
+alias = "tmg"
