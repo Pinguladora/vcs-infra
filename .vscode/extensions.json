@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "mineiros.terramate",
+        "opentofu.vscode-opentofu",
+        "infracost.infracost",
+    ],
+    "unwantedRecommendations": [
+        "gamunu.opentofu",
+        "HashiCorp.terraform",
+        "HashiCorp.terraform-preview",
+        "4ops.terraform",
+        "ms-azuretools.vscode-azureterraform",
+    ]
+}
