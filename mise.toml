@@ -1,18 +1,86 @@
 [tools]
+fzf = "0.70.0"
 infracost = "0.10.43"
 opentofu = "1.11.5"
 terramate = "0.16.0"
 
+# General tasks
+[tasks.format]
+description = "Run all formatters within the project"
+run = [{ tasks = ["tofu:format", "terramate:format"] }]
+alias = "fmt"
+
 # Tofu tasks
+[tasks."tofu:lock"]
+description = "Lock tofu providers"
+run = "tofu providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=darwin_arm64 -platform=linux_amd64 -platform=linux_arm64"
+alias = "tfpl"
+
 [tasks."tofu:plan"]
 run = "tofu plan -lock=true"
 alias = "tfp"
+
+[tasks."tofu:format"]
+run = "tofu fmt -recursive"
+alias = "tff"
 
 [tasks."tofu:apply"]
 run = "tofu apply -lock=true -concise -auto-approve"
 alias = "tfa"
 
 # Terramate tasks
+[tasks."terramate:info"]
+description = "Get terramate info"
+run = "terramate version"
+alias = "tmv"
+
+[tasks."terramate:format"]
+run = "terramate fmt"
+alias = "tmf"
+
 [tasks."terramate:generate"]
 run = "terramate generate"
+sources = ["**/*.tm.hcl"]
 alias = "tmg"
+depends = ["terramate:format"]
+
+[tasks."terramate:list"]
+description = "List stacks"
+run = "terramate list"
+alias = "tml"
+
+[tasks."terramate:tofu-lock"]
+description = "Lock tofu providers"
+run = "terramate run tofu providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=darwin_arm64 -platform=linux_amd64 -platform=linux_arm64"
+alias = "tmtfpl"
+
+[tasks."terramate:tofu-init"]
+description = "Run tofu init on all stacks"
+run = ["terramate run tofu init -upgrade", { task = "terramate:tofu-lock" }]
+alias = "tmtfi"
+depends = ["terramate:generate"]
+
+[tasks."terramate:tofu-plan"]
+description = "Run tofu plan on all stacks"
+run = "terramate run tofu plan"
+alias = "tmtfp"
+
+[tasks."terramate_stack:tofu-apply"]
+description = "Run tofu apply on a selected stack"
+run = 'terramate list | fzf --style full | terramate run -C '
+alias = "tmstfa"
+
+[tasks."terramate:tofu-apply"]
+description = "Run tofu apply on all stacks"
+run = "terramate run tofu --parallel 5 apply -lock=true -concise"
+alias = "tmtfa"
+
+[tasks."terramate:tofu-apply_autoapprove"]
+description = "Run tofu apply on all stacks"
+run = "terramate run --parallel 5 tofu apply -lock=true -concise -auto-approve"
+alias = "tmtfaa"
+
+[tasks."terramate:tofu-destroy"]
+description = "Run tofu apply destroy without autoapprove on all stacks"
+run = "terramate run tofu apply -destroy -lock=true"
+alias = "tmtfd"
