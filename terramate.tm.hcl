@@ -4,6 +4,9 @@ terramate {
     generate {
       hcl_magic_header_comment_style = "//"
     }
+    telemetry {
+      enabled = false
+    }
   }
 }
 
