@@ -4,6 +4,11 @@ terramate {
     generate {
       hcl_magic_header_comment_style = "//"
     }
+    run {
+      env {
+        TF_PLUGIN_CACHE_DIR = "${terramate.root.path.fs.absolute}/.tf_plugin_cache_dir"
+      }
+    }
     telemetry {
       enabled = false
     }
