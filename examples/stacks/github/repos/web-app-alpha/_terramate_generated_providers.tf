@@ -2,7 +2,7 @@
 
 provider "github" {
   max_retries = 3
-  owner       = "Pinguladora"
+  owner       = "Pinguteca"
   retryable_errors = [
     500,
     502,

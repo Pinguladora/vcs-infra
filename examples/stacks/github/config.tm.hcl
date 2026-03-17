@@ -1,5 +1,5 @@
 globals {
-  github_owner            = "Pinguladora"
+  github_owner            = "Pinguteca"
   github_provider_version = "6.11.1"
   repo_visibility         = "private"
 }
