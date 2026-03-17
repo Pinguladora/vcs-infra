@@ -31,7 +31,7 @@ resource "github_organization_settings" "settings" {
 }
 
 data "github_organization" "this" {
-  name       = var.github_org_login
+  name = var.github_org_login
 }
 
 # 2FA can only be enforced on GitHub UI
