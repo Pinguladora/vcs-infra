@@ -3,3 +3,6 @@
 terraform.tfstate
 terraform.tfstate.backup
 *.tfplan
+
+# Cache
+.tf_plugin_cache_dir
