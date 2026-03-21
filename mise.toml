@@ -4,6 +4,14 @@ infracost = "0.10.43"
 opentofu = "1.11.5"
 terramate = "0.16.0"
 
+[settings]
+lockfile = true
+locked = false
+
+[hooks]
+enter = "mise i"
+postinstall = "mise lock"
+
 # General tasks
 [tasks.format]
 description = "Run all formatters within the project"
