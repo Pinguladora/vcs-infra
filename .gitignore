@@ -6,3 +6,9 @@ terraform.tfstate.backup
 
 # Cache
 .tf_plugin_cache_dir
+
+# Mise local
+mise.local.toml
+mise.*.local.toml
+mise.local.lock
+mise.*.local.lock
